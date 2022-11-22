@@ -17,7 +17,6 @@ export const App = () => {
   const [contacts, setContacts] = useState(
     () => JSON.parse(localStorage.getItem('contacts')) ?? []
   );
-  const [filter, setFilter] = useState('');
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
@@ -39,18 +38,6 @@ export const App = () => {
     setContacts(contacts => [...contacts, contact]);
   };
 
-  const handleFilterInputChange = e => {
-    setFilter(e.currentTarget.value.toLowerCase().trim());
-  };
-
-  const deleteContact = id => {
-    setContacts(prevState => prevState.filter(contact => contact.id !== id));
-  };
-
-  const filterContacts = contacts.filter(item => {
-    return item.name.toLowerCase().includes(filter);
-  });
-
   return (
     <Container>
       <Section>
@@ -61,11 +48,8 @@ export const App = () => {
       {contacts.length > 0 ? (
         <Section>
           <SectionTitle>Your noted contacts</SectionTitle>
-          <Filter filter={filter} onListFilter={handleFilterInputChange} />
-          <ContactList
-            contacts={filterContacts}
-            onContactDelete={deleteContact}
-          />
+          <Filter />
+          <ContactList />
         </Section>
       ) : (
         <Notification>There are no contacts. Please add some.</Notification>

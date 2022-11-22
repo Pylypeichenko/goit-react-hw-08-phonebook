@@ -1,8 +1,16 @@
-import { PropTypes } from 'prop-types';
+import { useDispatch } from 'react-redux';
+
+import { setFilter } from '../../redux/actions';
 
 import { Label, Input } from './Filter.styled';
 
-export const Filter = ({ filter, onListFilter }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+
+  const handleFilterInputChange = e => {
+    dispatch(setFilter(e.currentTarget.value));
+  };
+
   return (
     <>
       <Label htmlFor="contactFilter">Find contact by name</Label>
@@ -10,14 +18,8 @@ export const Filter = ({ filter, onListFilter }) => {
         id="contactFilter"
         name="filter"
         type="text"
-        value={filter}
-        onChange={onListFilter}
+        onChange={handleFilterInputChange}
       />
     </>
   );
-};
-
-Filter.propTypes = {
-  filter: PropTypes.string.isRequired,
-  onListFilter: PropTypes.func.isRequired,
 };
