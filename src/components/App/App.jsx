@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { nanoid } from 'nanoid';
 
 import { Form } from '../Form/Form';
 import { Filter } from '../Filter/Filter';
@@ -22,28 +21,12 @@ export const App = () => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
-  const handleFormSubmit = contactData => {
-    const contact = {
-      id: nanoid(),
-      ...contactData,
-    };
-
-    const contactNames = contacts.map(item => item.name.toLowerCase());
-
-    if (contactNames.includes(contact.name.toLowerCase())) {
-      window.alert(`${contact.name} is already in your Phonebook`);
-      return;
-    }
-
-    setContacts(contacts => [...contacts, contact]);
-  };
-
   return (
     <Container>
       <Section>
         <PageTitle>Phonebook</PageTitle>
         <SectionTitle>Adding contact</SectionTitle>
-        <Form onFormSubmit={handleFormSubmit} />
+        <Form />
       </Section>
       {contacts.length > 0 ? (
         <Section>

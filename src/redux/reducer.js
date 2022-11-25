@@ -1,4 +1,5 @@
-import { combineReducers } from 'redux';
+import { createReducer } from '@reduxjs/toolkit';
+import { addContact, deleteContact, setFilter } from './actions';
 
 const contactsInitialState = {
   contacts: [
@@ -9,48 +10,30 @@ const contactsInitialState = {
   ],
 };
 
-export const contactsReducer = (state = contactsInitialState, action) => {
-  switch (action.type) {
-    case 'contacts/addContact': {
-      return {
-        ...state,
-        contacts: [...state.contacts, action.payload],
-      };
-    }
-
-    case 'contacts/deleteContact': {
-      return {
-        ...state,
-        contacts: state.contacts.filter(
-          contact => contact.id !== action.payload
-        ),
-      };
-    }
-
-    default:
-      return state;
-  }
-};
+export const contactsReducer = createReducer(contactsInitialState, {
+  [addContact]: (state, action) => {
+    return {
+      ...state,
+      contacts: [...state.contacts, action.payload],
+    };
+  },
+  [deleteContact]: (state, action) => {
+    return {
+      ...state,
+      contacts: state.contacts.filter(contact => contact.id !== action.payload),
+    };
+  },
+});
 
 const filterInititalState = {
   filter: '',
 };
 
-export const filterReducer = (state = filterInititalState, action) => {
-  switch (action.type) {
-    case 'contacts/setFilter': {
-      return {
-        ...state,
-        filter: action.payload,
-      };
-    }
-
-    default:
-      return state;
-  }
-};
-
-export const rootReducer = combineReducers({
-  contacts: contactsReducer,
-  filter: filterReducer,
+export const filterReducer = createReducer(filterInititalState, {
+  [setFilter]: (state, action) => {
+    return {
+      ...state,
+      filter: action.payload,
+    };
+  },
 });
