@@ -1,4 +1,6 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
+import { getContacts } from 'redux/selectors';
+import { useSelector } from 'react-redux';
 
 import { Form } from '../Form/Form';
 import { Filter } from '../Filter/Filter';
@@ -13,13 +15,15 @@ import {
 } from './App.styled';
 
 export const App = () => {
-  const [contacts, setContacts] = useState(
-    () => JSON.parse(localStorage.getItem('contacts')) ?? []
-  );
+  const contacts = useSelector(getContacts);
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  // const [contacts, setContacts] = useState(
+  //   () => JSON.parse(localStorage.getItem('contacts')) ?? []
+  // );
+
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
   return (
     <Container>
