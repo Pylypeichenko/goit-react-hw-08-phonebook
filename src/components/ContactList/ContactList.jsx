@@ -11,13 +11,11 @@ export const ContactList = () => {
   const filteredContacts = contacts.filter(item => {
     return item.name.toLowerCase().includes(filter.toLowerCase().trim());
   });
-  console.log(filteredContacts);
 
   return (
     <ul>
       {contacts &&
         filteredContacts.map(contact => {
-          console.log(contact);
           return (
             <ListItem key={contact.id}>
               <Contact contact={contact} />

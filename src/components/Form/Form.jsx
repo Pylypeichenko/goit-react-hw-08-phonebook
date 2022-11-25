@@ -28,7 +28,6 @@ export const Form = () => {
       name: contactName,
       number: contactNumber,
     };
-    console.log(contact);
 
     dispatch(addContact(contact));
 

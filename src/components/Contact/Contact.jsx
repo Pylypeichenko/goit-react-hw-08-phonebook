@@ -6,7 +6,6 @@ import { ContactInfo, Button } from './Contact.styled';
 
 export const Contact = contact => {
   const dispatch = useDispatch();
-  console.log(contact);
   const { name, number, id } = contact.contact;
 
   const onContactDelete = () => dispatch(deleteContact(id));
@@ -24,7 +23,7 @@ export const Contact = contact => {
 };
 
 Contact.propTypes = PropTypes.shape({
-  id: PropTypes.string,
-  name: PropTypes.string,
-  number: PropTypes.string,
+  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string.isRequired,
 });
