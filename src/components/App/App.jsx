@@ -1,4 +1,3 @@
-// import { useState, useEffect } from 'react';
 import { getContacts } from 'redux/selectors';
 import { useSelector } from 'react-redux';
 
@@ -16,14 +15,6 @@ import {
 
 export const App = () => {
   const contacts = useSelector(getContacts);
-
-  // const [contacts, setContacts] = useState(
-  //   () => JSON.parse(localStorage.getItem('contacts')) ?? []
-  // );
-
-  // useEffect(() => {
-  //   localStorage.setItem('contacts', JSON.stringify(contacts));
-  // }, [contacts]);
 
   return (
     <Container>

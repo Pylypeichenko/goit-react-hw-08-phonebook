@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import PropTypes from 'prop-types';
 import { deleteContact } from 'redux/contactsSlice';
 
 import { ContactInfo, Button } from './Contact.styled';
@@ -21,3 +22,9 @@ export const Contact = contact => {
     </>
   );
 };
+
+Contact.propTypes = PropTypes.shape({
+  id: PropTypes.string,
+  name: PropTypes.string,
+  number: PropTypes.string,
+});
