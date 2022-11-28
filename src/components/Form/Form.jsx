@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { nanoid } from 'nanoid';
-
+import { useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 import { addContact } from 'redux/contactsSlice';
-
 import { ContactForm, Label, Input, Button } from './Form.styled';
 
 export const Form = () => {
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
+  const contacts = useSelector(getContacts);
+
   const dispatch = useDispatch();
 
   const handleInputChange = e => {
@@ -24,12 +25,18 @@ export const Form = () => {
     e.preventDefault();
     const form = e.target;
     const contact = {
-      id: nanoid(),
       name: contactName,
       number: contactNumber,
     };
 
-    dispatch(addContact(contact));
+    const repeatedNames = contacts.filter(item => item.name === contactName);
+
+    if (repeatedNames.length === 0) {
+      dispatch(addContact(contact));
+    }
+    if (repeatedNames.length !== 0) {
+      window.alert('You have already this contact in your list');
+    }
 
     form.reset();
   };

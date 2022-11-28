@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
+import { nanoid } from 'nanoid';
 
 const contactsInitialState = {
   contacts: [
@@ -22,16 +23,18 @@ const contactsSlice = createSlice({
       prepare(contact) {
         return {
           payload: {
-            id: contact.id,
+            id: nanoid(),
             name: contact.name,
             number: contact.number,
           },
         };
       },
-      deleteContact(state, action) {
-        const index = state.findIndex(contact => contact.id === action.payload);
-        state.splice(index, 1);
-      },
+    },
+    deleteContact(state, action) {
+      const index = state.contacts.findIndex(
+        contact => contact.id === action.payload
+      );
+      state.contacts.splice(index, 1);
     },
   },
 });
