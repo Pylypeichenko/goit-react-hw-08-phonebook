@@ -1,5 +1,5 @@
 import { getContacts } from 'redux/selectors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { Form } from '../Form/Form';
 import { Filter } from '../Filter/Filter';
@@ -12,9 +12,16 @@ import {
   SectionTitle,
   Notification,
 } from './App.styled';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
 
 export const App = () => {
-  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
+  const { items, isLoading, error } = useSelector(getContacts);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
   return (
     <Container>
@@ -23,7 +30,10 @@ export const App = () => {
         <SectionTitle>Adding contact</SectionTitle>
         <Form />
       </Section>
-      {contacts.length > 0 ? (
+      {isLoading && <b>Loading contacts...</b>}
+      {error && <b>{error}</b>}
+      <p>{items.length > 0 && JSON.stringify(items, null, 2)}</p>
+      {items.length > 0 ? (
         <Section>
           <SectionTitle>Your noted contacts</SectionTitle>
           <Filter />

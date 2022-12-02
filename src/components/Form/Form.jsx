@@ -32,7 +32,7 @@ export const Form = () => {
     const repeatedNames = contacts.filter(item => item.name === contactName);
 
     if (repeatedNames.length === 0) {
-      dispatch(addContact(contact));
+      // dispatch(addContact(contact));
     }
     if (repeatedNames.length !== 0) {
       window.alert('You have already this contact in your list');

@@ -8,14 +8,15 @@ export const Contact = contact => {
   const dispatch = useDispatch();
   const { name, number, id } = contact.contact;
 
-  const onContactDelete = () => dispatch(deleteContact(id));
+  // const onContactDelete = () => dispatch(deleteContact(id));
 
   return (
     <>
       <ContactInfo>
         {name}: {number}
       </ContactInfo>
-      <Button type="button" onClick={onContactDelete}>
+      <Button type="button">
+        {/* onClick={onContactDelete} */}
         Delete contact
       </Button>
     </>

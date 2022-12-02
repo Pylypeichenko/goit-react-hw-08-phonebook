@@ -7,21 +7,21 @@ import { ListItem } from './ContactList.styled';
 
 export const ContactList = () => {
   const contacts = useSelector(getContacts);
-  const filter = useSelector(getFilter);
-  const filteredContacts = contacts.filter(item => {
-    return item.name.toLowerCase().includes(filter.toLowerCase().trim());
-  });
+  // const filter = useSelector(getFilter);
+  // const filteredContacts = contacts.filter(item => {
+  //   return item.name.toLowerCase().includes(filter.toLowerCase().trim());
+  // });
 
   return (
     <ul>
-      {contacts &&
-        filteredContacts.map(contact => {
+      {/* {contacts &&
+        contacts.map(contact => {
           return (
             <ListItem key={contact.id}>
               <Contact contact={contact} />
             </ListItem>
           );
-        })}
+        })} */}
     </ul>
   );
 };
