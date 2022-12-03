@@ -1,6 +1,8 @@
-import { selectContacts, selectError, selectIsLoading } from 'redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
+import { selectContacts, selectError, selectIsLoading } from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
 import { Form } from '../Form/Form';
 import { Filter } from '../Filter/Filter';
 import { ContactList } from '../ContactList/ContactList';
@@ -12,8 +14,6 @@ import {
   SectionTitle,
   Notification,
 } from './App.styled';
-import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -32,7 +32,6 @@ export const App = () => {
         <SectionTitle>Adding contact</SectionTitle>
         <Form />
       </Section>
-      {/* <p>{contacts.length > 0 && JSON.stringify(contacts, null, 2)}</p> */}
       <Section>
         <SectionTitle>Your noted contacts</SectionTitle>
         {error && <b>{error}</b>}
