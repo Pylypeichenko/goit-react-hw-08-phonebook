@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
+import { selectContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 import { ContactForm, Label, Input, Button } from './Form.styled';
 
 export const Form = () => {
   const [contactName, setContactName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const dispatch = useDispatch();
 
@@ -32,7 +32,7 @@ export const Form = () => {
     const repeatedNames = contacts.filter(item => item.name === contactName);
 
     if (repeatedNames.length === 0) {
-      // dispatch(addContact(contact));
+      dispatch(addContact(contact));
     }
     if (repeatedNames.length !== 0) {
       window.alert('You have already this contact in your list');

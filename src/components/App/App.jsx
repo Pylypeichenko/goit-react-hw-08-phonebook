@@ -1,4 +1,4 @@
-import { getContacts } from 'redux/selectors';
+import { selectContacts, selectError, selectIsLoading } from 'redux/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Form } from '../Form/Form';
@@ -17,7 +17,9 @@ import { fetchContacts } from 'redux/operations';
 
 export const App = () => {
   const dispatch = useDispatch();
-  const { items, isLoading, error } = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(fetchContacts());
@@ -30,18 +32,20 @@ export const App = () => {
         <SectionTitle>Adding contact</SectionTitle>
         <Form />
       </Section>
-      {isLoading && <b>Loading contacts...</b>}
-      {error && <b>{error}</b>}
-      <p>{items.length > 0 && JSON.stringify(items, null, 2)}</p>
-      {items.length > 0 ? (
-        <Section>
-          <SectionTitle>Your noted contacts</SectionTitle>
-          <Filter />
-          <ContactList />
-        </Section>
-      ) : (
-        <Notification>There are no contacts. Please add some.</Notification>
-      )}
+      {/* <p>{contacts.length > 0 && JSON.stringify(contacts, null, 2)}</p> */}
+      <Section>
+        <SectionTitle>Your noted contacts</SectionTitle>
+        {error && <b>{error}</b>}
+        {contacts.length > 0 ? (
+          <>
+            <Filter />
+            <ContactList />
+          </>
+        ) : (
+          <Notification>There are no contacts. Please add some.</Notification>
+        )}
+        {isLoading && <b>Loading contacts...</b>}
+      </Section>
     </Container>
   );
 };
