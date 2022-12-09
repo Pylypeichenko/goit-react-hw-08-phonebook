@@ -1,8 +1,12 @@
-export const HomePage = () => {
+import { Container } from 'components/common.styled';
+import { HomeTitleWrapper } from './Home.styled';
+
+export default function HomePage() {
   return (
-    <>
-      <h1>Welcome to your own book of contacts</h1>
-      <h2>Please sign up</h2>
-    </>
+    <Container>
+      <HomeTitleWrapper>
+        <h1>Welcome to your own book of contacts</h1>
+      </HomeTitleWrapper>
+    </Container>
   );
-};
+}

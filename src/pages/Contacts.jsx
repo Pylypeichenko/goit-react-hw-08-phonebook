@@ -14,8 +14,8 @@ import {
   Section,
   PageTitle,
   SectionTitle,
-  Notification,
-} from '../components/App/App.styled';
+} from '../components/common.styled';
+import { Notification } from '../components/App/App.styled';
 
 export default function Tasks() {
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ export default function Tasks() {
   return (
     <Container>
       <Helmet>
-        <title>Your tasks</title>
+        <title>Your contacts</title>
       </Helmet>
       <div>{isLoading && 'Request in progress...'}</div>
       <Section>
