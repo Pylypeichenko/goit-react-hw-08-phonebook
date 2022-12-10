@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { register } from '../../redux/operations';
+import { register } from '../../redux/auth/operations';
 
 import { Form, Input } from './RegisterForm.styled';
 import { Container } from 'components/common.styled';

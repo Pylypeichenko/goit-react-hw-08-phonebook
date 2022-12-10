@@ -6,7 +6,7 @@ import { Form } from '../components/Form/Form';
 import { Filter } from '../components/Filter/Filter';
 
 import { ContactList } from '../components/ContactList/ContactList';
-import { fetchContacts } from '../redux/operations';
+import { fetchContacts } from '../redux/contacts/operations';
 import { selectContacts, selectIsLoading } from '../redux/selectors';
 
 import {

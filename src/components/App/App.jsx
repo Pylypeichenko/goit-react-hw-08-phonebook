@@ -1,38 +1,22 @@
-import { useDispatch } from 'react-redux'; //useSelector
+import { useDispatch } from 'react-redux';
 import { useEffect, lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-// import { selectContacts, selectError, selectIsLoading } from 'redux/selectors';
-// import { fetchContacts } from 'redux/operations';
-// import { Form } from '../Form/Form';
-// import { Filter } from '../Filter/Filter';
-// import { ContactList } from '../ContactList/ContactList';
 import { Layout } from '../Layout';
 import { PrivateRoute } from '../PrivateRoute';
 import { RestrictedRoute } from '../RestrictedRoute';
-import { refreshUser } from '../../redux/operations';
+import { refreshUser } from '../../redux/auth/operations';
 import { useAuth } from '../../hooks/useAuth';
-
-// import {
-//   Container,
-//   Section,
-//   PageTitle,
-//   SectionTitle,
-//   Notification,
-// } from './App.styled';
 
 const HomePage = lazy(() => import('../../pages/Home/Home'));
 const RegisterPage = lazy(() => import('../../pages/Register'));
 const LoginPage = lazy(() => import('../../pages/LogIn'));
 const ContactsPage = lazy(() => import('../../pages/Contacts'));
+const NotFound = lazy(() => import('../../pages/NotFound/NotFound'));
 
 export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing } = useAuth();
-
-  // const contacts = useSelector(selectContacts);
-  // const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -65,30 +49,8 @@ export const App = () => {
             <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
   );
-
-  // return (
-  //   <Container>
-  //     <Section>
-  //       <PageTitle>Phonebook</PageTitle>
-  //       <SectionTitle>Adding contact</SectionTitle>
-  //       <Form />
-  //     </Section>
-  //     <Section>
-  //       <SectionTitle>Your noted contacts</SectionTitle>
-  //       {error && <b>{error}</b>}
-  //       {contacts.length > 0 ? (
-  //         <>
-  //           <Filter />
-  //           <ContactList />
-  //         </>
-  //       ) : (
-  //         <Notification>There are no contacts. Please add some.</Notification>
-  //       )}
-  //       {isLoading && <b>Loading contacts...</b>}
-  //     </Section>
-  //   </Container>
-  // );
 };
